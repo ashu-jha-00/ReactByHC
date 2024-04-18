@@ -1,43 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeTodo } from '../features/todo/todoSlice'
 
 function Todos() {
-    const [isTodoEditable ,setIsTodoEditable] = useState(false);
     const todos = useSelector(state => state.todos)
     const dispatch = useDispatch()
     console.log(todos);
     return (
         <>
             <div className='font-medium p-4 text-4xl'>Todos</div>
+
             <ul className="list-none">
                 {todos.map((todo) => (
+                    
                     <li
                         className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
                         key={todo.id}
-                    >
+                    >   
+                       
                         <input
+                           
                             type="checkbox"
                             className="cursor-pointer h-6 w-6 rounded border-gray-300 focus:ring-zinc-500 bg-zinc-800 text-zinc-300"
-                        // checked={todo.completed}
-                        // onChange={toggleCompleted}
+                            checked={todo.completed}
+                            onChange={toggleCompleted}
                         />
-                        <div className='text-white'>{todo.text}</div>
-                        <button
-                            className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
-                            onClick={() => {
-                                
-                                // if (todo.completed) return;
-
-                                // if (isTodoEditable) {
-                                //     editTodo();
-                                // } else setIsTodoEditable((prev) => !prev);
-                            }}
-                            // disabled={todo.completed}
-                        >
-                         ✏️
-                         {/* {isTodoEditable ? "📁" : "✏️"} */}
-                        </button>
+                         
+                        <div className='text-white'> {todo.text}</div>
                         <button
                             onClick={() => dispatch(removeTodo(todo.id))}
                             className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
